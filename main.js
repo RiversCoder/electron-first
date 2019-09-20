@@ -9,7 +9,7 @@ const path  = require('path');
 const { app, BrowserWindow, Menu, ipcMain } = electron;
 
 // 设置当前环境
-process.env.NODE_ENV = 'production'
+process.env.NODE_ENV = 'development' // production
 
 let mainWindow;
 let addWindow;
@@ -45,7 +45,7 @@ function createNewWindow(){
 
   // 新建有固定宽高的窗口
   addWindow = new BrowserWindow({
-    width:600, height: 400, title: 'add book list item',
+    width:600, height: 300, title: 'add book list item',
     webPreferences: {
         nodeIntegration: true
     }
