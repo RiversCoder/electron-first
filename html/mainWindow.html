@@ -3,8 +3,54 @@
   <head>
     <meta charset="utf-8">
     <title>BookList</title>
+    <link rel="stylesheet" type="text/css" href="./css/basic.css" />
   </head>
   <body>
-    <h1>BookList</h1>
+    <!-- 顶部导航 -->
+    <nav>
+     <div class="nav-wrapper">
+       <a href="#" class="brand-logo">书籍列表</a>
+     </div>
+   </nav>
+
+   <!-- 小说列表 class="collection" -->
+   <ul id="bookList">
+      <!-- <li class="collection-item">Alvin</li>
+      <li class="collection-item">Alvin</li>
+      <li class="collection-item">Alvin</li>
+      <li class="collection-item">Alvin</li> -->
+    </ul>
+
+    <script>
+      const electron = require('electron');
+      const { ipcRenderer } = electron;
+      const ul = document.querySelector('#bookList');
+
+      // 接收 add 窗口的数据 book:add
+      ipcRenderer.on('book:add', (e, val) => {
+        const li = document.createElement('li');
+        ul.className = 'collection'
+        li.className = 'collection-item';
+        li.innerText = val;
+        ul.appendChild(li);
+      });
+
+      // 接收 清空的事件 清除所有的列表数据
+      ipcRenderer.on('book:clear',(e, val) => {
+        ul.innerHTML = '';
+      });
+
+      // 双击删除
+      ul.addEventListener('dblclick', (e) => {
+        if(e.target.nodeName == 'LI'){
+          e.target.remove();
+        }
+        // 清除样式
+        if(ul.children.length == 0){
+          ul.classList.remove('collection');
+        }
+      });
+
+    </script>
   </body>
 </html>
