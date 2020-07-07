@@ -15,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "electron": "^6.0.10",
+    "electron": "^9.1.0",
     "electron-packager": "^14.0.6"
   }
 }
